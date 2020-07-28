@@ -1,0 +1,48 @@
+@import '~open-color/open-color';
+
+.textarea__container {
+  display: flex;
+  flex-direction: column;
+  -webkit-box-align: stretch;
+  min-height: 4px;
+  max-width: calc(100% - 32px);
+  color: rgb(56, 64, 71);
+  flex: 1 1 auto;
+  padding: 9px 16px 8px;
+  border-radius: 24px;
+  border: 1px solid rgb(235, 236, 237);
+  transition: border 0.3s ease-out 0s;
+  &:hover {
+    border-color: $oc-gray-7;
+  }
+  .textarea__wrapper {
+    position: relative;
+    overflow: visible;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1.4;
+    .textarea__control {
+      word-break: break-word;
+      .highlighter__container {
+        display: block;
+        position: relative;
+        top: 0px;
+        width: inherit;
+        font-size: inherit;
+        height: 100%;
+        bottom: 0px;
+        overflow: hidden;
+        resize: none;
+        color: transparent;
+        white-space: pre-wrap;
+        overflow-wrap: break-word;
+        .highlighter {
+          visibility: hidden;
+        }
+        .textarea {
+          border: none;
+        }
+      }
+    }
+  }
+}

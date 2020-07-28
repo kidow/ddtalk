@@ -1,0 +1,36 @@
+# name: Firebase Deploy
+
+# on:
+#   push:
+#     branches: [master]
+
+# jobs:
+#   deploy:
+#     runs-on: ubuntu-latest
+
+#     strategy:
+#       matrix:
+#         node-version: [10.x]
+
+#     steps:
+#       - name: Checkout Repo
+#         uses: actions/checkout@master
+
+#       - name: Use Node.js ${{ matrix.node-version }}
+#         uses: actions/setup-node@v1
+#         with:
+#           node-version: ${{ matrix.node-version }}
+
+#       - name: Install dependencies
+#         run: npm install
+
+#       - name: Download Artifact
+#         uses: actions/download-artifact@master
+
+#       - name: Deploy to Firebase
+#         uses: w9jds/firebase-action@master
+#         with:
+#           args: deploy
+#         env:
+#           PROJECT_ID: 'ddtalk-65a8c'
+#           FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}

@@ -1,0 +1,11 @@
+.main__container {
+  flex: 1;
+  background: #fff;
+  border-left: 1px solid rgb(235, 236, 237);
+  border-right: 1px solid rgb(235, 236, 237);
+  height: 100vh;
+  overflow: auto;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}

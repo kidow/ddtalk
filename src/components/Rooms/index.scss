@@ -1,0 +1,85 @@
+@import '~open-color/open-color';
+
+.rooms__container {
+  width: 380px;
+  border-left: 1px solid rgb(235, 236, 237);
+  height: 100vh;
+  background: #fff;
+  margin-right: 20px;
+  border-right: 1px solid rgb(235, 236, 237);
+  overflow: auto;
+  &::-webkit-scrollbar {
+    @media screen and (max-width: 768px) {
+      display: none;
+    }
+  }
+  .rooms__logo {
+    padding: 10px 16px;
+    position: fixed;
+    top: 0;
+    width: inherit;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0;
+    z-index: 100;
+    border-bottom: 1px solid $oc-gray-1;
+    background: #fff;
+    img {
+      cursor: pointer;
+      &:hover {
+        filter: brightness(0.9);
+      }
+      &:active {
+        filter: brightness(1.1);
+      }
+    }
+    .login__button {
+      color: rgba(0, 0, 0, 0.87);
+      font-size: 14px;
+    }
+  }
+  .list {
+    margin-top: 56px;
+  }
+}
+
+.item {
+  border-bottom: 1px solid $oc-gray-1 !important;
+  border-top: none !important;
+  padding: 16px !important;
+  cursor: pointer;
+  img {
+    width: 44px !important;
+    height: 44px !important;
+    &.robot {
+      width: 17.5px !important;
+      height: 14px !important;
+      vertical-align: unset !important;
+      margin: 0 !important;
+      margin-right: 10px !important;
+    }
+  }
+  .content {
+    line-height: 1.4 !important;
+    padding-left: 1rem !important;
+    .header {
+      font-size: 15px;
+    }
+    .description {
+      text-overflow: ellipsis;
+      overflow: hidden;
+      max-width: 180px;
+      white-space: nowrap;
+    }
+  }
+  .floated {
+    color: rgba(0, 0, 0, 0.6);
+  }
+  &:hover {
+    background: $oc-gray-0;
+  }
+  &.selected {
+    border-left: 2px solid #fd7e14;
+    background: $oc-gray-0;
+  }
+}

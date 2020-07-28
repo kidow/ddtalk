@@ -1,0 +1,20 @@
+{
+  "short_name": "디디톡",
+  "name": "개발자 채팅방",
+  "icons": [
+    {
+      "src": "favicon.ico",
+      "sizes": "64x64 32x32 24x24 16x16",
+      "type": "image/x-icon"
+    },
+    {
+      "src": "favicon-196x196.png",
+      "type": "image/png",
+      "sizes": "196x196"
+    }
+  ],
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#fd7e14",
+  "background_color": "#ffffff"
+}

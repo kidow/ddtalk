@@ -1,0 +1,30 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500&display=swap');
+
+body {
+  background-color: #fafafa;
+  font-family: 'Nanum Gothic', sans-serif;
+}
+
+textarea {
+  resize: none;
+  outline: none;
+  width: 100%;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+a {
+  color: rgba(0, 0, 0, 0.87);
+  text-decoration: none;
+}
+
+@media screen and (max-width: 500px) {
+  .container {
+    margin: 0 !important;
+  }
+  .rooms__container {
+    margin-right: 0 !important;
+    width: 100% !important;
+  }
+}

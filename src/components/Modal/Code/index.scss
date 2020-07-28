@@ -1,0 +1,13 @@
+.code__modal {
+  .header {
+    display: flex !important;
+    justify-content: space-between;
+
+    .dropdown {
+      .visible {
+        max-height: 300px;
+        overflow: auto;
+      }
+    }
+  }
+}

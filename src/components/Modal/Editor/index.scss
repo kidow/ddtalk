@@ -1,0 +1,19 @@
+.editor__modal {
+  .header {
+    display: flex !important;
+    justify-content: space-between;
+    .header__left {
+      display: flex;
+      align-items: center;
+      .header__at {
+        margin-left: 8px;
+      }
+    }
+    .dropdown {
+      .visible {
+        max-height: 300px;
+        overflow: auto;
+      }
+    }
+  }
+}

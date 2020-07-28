@@ -1,0 +1,25 @@
+.chat__container {
+  .comments {
+    max-width: unset;
+  }
+  .chat__loader {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+  }
+  .comment {
+    &.my {
+      text-align: right;
+    }
+    .actions a {
+      margin: 0 0 0 4px !important;
+    }
+    .image {
+      cursor: pointer;
+    }
+    .text a {
+      color: #1e70bf;
+    }
+  }
+}
