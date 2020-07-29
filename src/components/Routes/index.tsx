@@ -53,10 +53,11 @@ const ReRoutes: React.FunctionComponent<Props> = () => {
       firebase
         .firestore()
         .collection('chat')
-        .where('createdAt', '>=', new Date().getTime() - 86400 * 1000 * 7)
+        // .where('createdAt', '>=', new Date().getTime() - 86400 * 1000 * 7)
         .orderBy('createdAt', 'asc')
         .onSnapshot((querySnapshot) => {
           querySnapshot.docChanges().forEach((change) => {
+            if (change.type !== 'added') return
             let data = change.doc.data() as IChat
             data.message = data.message.replace(/\n/g, '<br />')
             dispatch(RoomActions.ADD_CHAT(data))

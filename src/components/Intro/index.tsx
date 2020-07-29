@@ -38,7 +38,7 @@ const ReIntro: React.FunctionComponent<Props> = () => {
         수 있도록 만든 채팅방 플랫폼입니다.
       </div>
 
-      <div
+      {/* <div
         style={{
           margin: '16px 40px',
           textAlign: 'center',
@@ -49,7 +49,7 @@ const ReIntro: React.FunctionComponent<Props> = () => {
         }}
       >
         작성된 지 일주일이 지난 채팅은 전부 삭제됩니다.
-      </div>
+      </div> */}
 
       <img
         src="https://firebasestorage.googleapis.com/v0/b/ddtalk-65a8c.appspot.com/o/admin%2Fintro-code.gif?alt=media&token=0664eab4-3387-49fd-b652-0952b58c5384"
@@ -103,7 +103,7 @@ const ReIntro: React.FunctionComponent<Props> = () => {
       </div>
 
       <div style={{ textAlign: 'center' }}>
-      Copyright © {moment().format('YYYY')}. ddtalk all rights reserved.
+        Copyright © {moment().format('YYYY')}. ddtalk all rights reserved.
       </div>
 
       <Modal open={open} onClose={() => setState({ open: false })}>

@@ -103,7 +103,7 @@ export const upload = async ({
       async () => {
         try {
           const downloadURL: string = await storageReg.snapshot.ref.getDownloadURL()
-          await deleteImage()
+          // await deleteImage()
           resolve(downloadURL)
         } catch (err) {
           captureException({ err, type: 'upload error' })
