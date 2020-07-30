@@ -50,7 +50,7 @@ const ReModalSetting: React.FunctionComponent<Props> = ({ open, onClose }) => {
   const onResign = async () => {
     await deleteUser()
     toastSuccess('다음에 봐요.')
-    dispatch(AuthActions.INITIALIZE())
+    dispatch(AuthActions.LOG_OUT())
     setState({ resignOpen: false })
     onClose()
   }

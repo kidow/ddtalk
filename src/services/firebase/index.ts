@@ -157,7 +157,10 @@ export const getRedirectResult = (): Promise<firebase.auth.UserCredential> =>
       })
   )
 
-export const createDoc = (collection: 'chat' | 'rooms', data: any) =>
+export const createDoc = (
+  collection: 'chat' | 'rooms' | 'improvements',
+  data: any
+) =>
   new Promise((resolve, reject) =>
     firebase
       .firestore()

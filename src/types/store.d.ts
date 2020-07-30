@@ -1,11 +1,14 @@
 import { StrictCommentGroupProps } from 'semantic-ui-react'
 import { IRoom, IMention, ITimeline, Language } from 'types'
 
-export interface IAuthState extends Partial<firebase.User> {
+export interface IAuthState {
   open: boolean
   isFetched: boolean
   nickname: string
   isLoggedIn: boolean
+  uid: string
+  photoURL: string
+  email: string
 }
 
 export interface ISettingState {

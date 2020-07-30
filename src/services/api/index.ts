@@ -1,6 +1,6 @@
 import axios, { AxiosError, AxiosResponse } from 'axios'
 import { captureException } from 'services'
-import { ISentry, IMessaging } from 'types'
+import { ISentry, IMessaging, SendImprove } from 'types'
 
 const request = axios.create({
   baseURL: process.env.REACT_APP_API_BASE_URL,

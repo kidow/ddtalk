@@ -1,4 +1,5 @@
 export * from './store'
+export * from './api'
 
 export interface IMention {
   username: string

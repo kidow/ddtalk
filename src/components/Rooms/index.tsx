@@ -1,5 +1,11 @@
 import React from 'react'
-import { ReModalAdmin, ReModalSetting, ReLogo, ReModalIntro } from 'components'
+import {
+  ReModalAdmin,
+  ReModalSetting,
+  ReLogo,
+  ReModalIntro,
+  ReModalImprove
+} from 'components'
 import {
   List,
   Image,
@@ -22,6 +28,7 @@ interface State {
   adminOpen: boolean
   settingOpen: boolean
   introOpen: boolean
+  improveOpen: boolean
 }
 
 const ReRooms: React.FunctionComponent<Props> = () => {
@@ -30,14 +37,18 @@ const ReRooms: React.FunctionComponent<Props> = () => {
   const dispatch = useDispatch()
   const { photoURL, uid } = useStore<IAuthState>('auth')
   const { rooms, loading } = useStore<IRoomState>('room')
-  const [{ adminOpen, settingOpen, introOpen }, setState] = useObject<State>({
+  const [
+    { adminOpen, settingOpen, introOpen, improveOpen },
+    setState
+  ] = useObject<State>({
     adminOpen: false,
     settingOpen: false,
-    introOpen: false
+    introOpen: false,
+    improveOpen: false
   })
   const logOut = async () => {
     await signOut()
-    dispatch(AuthActions.INITIALIZE())
+    dispatch(AuthActions.LOG_OUT())
   }
   const options: DropdownItemProps[] = [
     {
@@ -57,6 +68,15 @@ const ReRooms: React.FunctionComponent<Props> = () => {
       onClick: () => {
         logEvent('설정_클릭')
         setState({ settingOpen: true })
+      }
+    },
+    {
+      key: 'improve',
+      text: '개선점',
+      icon: 'chart line',
+      onClick: () => {
+        logEvent('개선점_클릭')
+        setState({ improveOpen: true })
       }
     },
     {
@@ -177,6 +197,10 @@ const ReRooms: React.FunctionComponent<Props> = () => {
       <ReModalIntro
         open={introOpen}
         onClose={() => setState({ introOpen: false })}
+      />
+      <ReModalImprove
+        open={improveOpen}
+        onClose={() => setState({ improveOpen: false })}
       />
     </>
   )
