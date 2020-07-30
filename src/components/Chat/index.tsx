@@ -124,7 +124,7 @@ const ReChat: React.FunctionComponent<Props> = ({ room, onCodeClick }) => {
         images: [],
         mentions,
         commands: [],
-        fcm_token
+        fcm_token: fcm_token || ''
       })
       await createDoc('chat', {
         message: menus[Math.floor(Math.random() * menus.length)],
@@ -135,7 +135,7 @@ const ReChat: React.FunctionComponent<Props> = ({ room, onCodeClick }) => {
         language: '',
         images: [],
         mentions: [],
-        fcm_token
+        fcm_token: fcm_token || ''
       })
     }
   }
@@ -260,7 +260,7 @@ const ReChat: React.FunctionComponent<Props> = ({ room, onCodeClick }) => {
                           </Label>
                         </Comment.Action>
                       ))}
-                      {!!chat.originalCode && (
+                      {/* {!!chat.originalCode && (
                         <Comment.Action>
                           <Label
                             onClick={() => onCodeLabelClick(chat)}
@@ -269,7 +269,7 @@ const ReChat: React.FunctionComponent<Props> = ({ room, onCodeClick }) => {
                             {chat.language}
                           </Label>
                         </Comment.Action>
-                      )}
+                      )} */}
                       <Image.Group size="small">
                         {chat.images.map((image: any, i: number) => (
                           <Image
@@ -280,16 +280,14 @@ const ReChat: React.FunctionComponent<Props> = ({ room, onCodeClick }) => {
                         ))}
                       </Image.Group>
                     </Comment.Actions>
-                    {/* {!!chat.originalCode && (
+                    {!!chat.originalCode && (
                       <Comment.Actions>
-                        <div>
-                          <ReCodePreview
-                            originalCode={chat.originalCode}
-                            language={chat.language}
-                            modifiedCode={chat.modifiedCode}
-                          />
-                          <br />
-                          {chat.modifiedCode ? (
+                        <ReCodePreview
+                          originalCode={chat.originalCode}
+                          language={chat.language}
+                          modifiedCode={chat.modifiedCode}
+                        />
+                        {/* {chat.modifiedCode ? (
                             <ReDiffEditor
                               height="400"
                               readOnly
@@ -304,10 +302,9 @@ const ReChat: React.FunctionComponent<Props> = ({ room, onCodeClick }) => {
                               height="400"
                               value={chat.originalCode}
                             />
-                          )}
-                        </div>
+                          )} */}
                       </Comment.Actions>
-                    )} */}
+                    )}
                   </Comment.Content>
                 </Comment>
               </Fragment>

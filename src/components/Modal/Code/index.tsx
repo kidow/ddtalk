@@ -57,7 +57,7 @@ const ReModalCode: React.FunctionComponent<Props> = ({ open, onClose }) => {
         mentions,
         modifiedCode: code.trim(),
         commands: [],
-        fcm_token
+        fcm_token: fcm_token || ''
       }
       if (modifiedCode) data.originalCode = modifiedCode
       else data.originalCode = originalCode

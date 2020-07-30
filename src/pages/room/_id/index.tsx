@@ -114,7 +114,7 @@ const Room: FunctionComponent<Props> = () => {
       images: urls,
       mentions,
       commands: [],
-      fcm_token
+      fcm_token: fcm_token || ''
     })
     setState({ count: count + 1, uploading: false })
     dispatch(ChatActions.INITIALIZE())
@@ -130,7 +130,7 @@ const Room: FunctionComponent<Props> = () => {
         language: '',
         images: [],
         mentions: [],
-        fcm_token
+        fcm_token: fcm_token || ''
       })
   }
 
@@ -215,7 +215,7 @@ const Room: FunctionComponent<Props> = () => {
       images: [],
       mentions: [],
       commands: [],
-      fcm_token
+      fcm_token: fcm_token || ''
     })
     await callBot(id)
   }

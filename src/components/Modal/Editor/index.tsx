@@ -68,7 +68,7 @@ const ReModalEditor: React.FunctionComponent<Props> = ({ open, onClose }) => {
         modifiedCode: '',
         mentions,
         commands: [],
-        fcm_token
+        fcm_token: fcm_token || ''
       })
       if (mentions.length) {
         mentions.forEach(async (mention) => {

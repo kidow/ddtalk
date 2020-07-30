@@ -41,7 +41,7 @@ const ReGiphy: React.FunctionComponent<Props> = ({ open, onClose }) => {
       mentions: [],
       commands: [],
       giphy: gif.embed_url,
-      fcm_token
+      fcm_token: fcm_token || ''
     })
     onClose()
   }
