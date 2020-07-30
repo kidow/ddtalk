@@ -1,59 +1,113 @@
-import React from 'react'
-import { CopyBlock, tomorrowNight } from 'react-code-blocks'
-import { Language } from 'types'
-import DiffViewer, { DiffMethod } from 'react-diff-viewer'
+import React, { FunctionComponent } from 'react'
+import * as Monaco from 'monaco-editor/esm/vs/editor/editor.api'
+import MonacoEditor, {
+  MonacoEditorProps,
+  MonacoDiffEditor
+} from 'react-monaco-editor'
+import './index.scss'
 import { Icon } from 'semantic-ui-react'
+import CopyToClipboard from 'react-copy-to-clipboard'
+import { logEvent, toastSuccess } from 'services'
 
-interface Props {
+interface Props extends MonacoEditorProps {
   originalCode: string
-  modifiedCode: string
-  language: Language
+  modifiedCode?: string
+  onCodeLabelClick: () => void
 }
 interface State {}
 
-const ReCodeBlocks: React.FunctionComponent<Props> = ({
+const ReCodePreview: FunctionComponent<Props> = ({
   originalCode,
-  language,
-  modifiedCode
+  modifiedCode,
+  onCodeLabelClick,
+  ...props
 }) => {
-  const renderContent = (source: string) => {
-    return <pre style={{ display: 'inline', textAlign: 'right' }}>{source}</pre>
+  const editorDidMount = (
+    editor: Monaco.editor.IStandaloneCodeEditor,
+    monaco: typeof Monaco
+  ) => {
+    const element = editor.getDomNode()
+    if (!element) return
+    const model = editor.getModel()
+    if (!model) return
+    const lineHeight = editor.getOption(Monaco.editor.EditorOption.lineHeight)
+    const lineCount = model.getLineCount() || 1
+    const height = editor.getTopForLineNumber(lineCount + 1) + lineHeight
+    element.style.height = `${height}px`
+    element.style.maxHeight = `${height}px`
+    editor.layout()
+  }
+  const diffEditorDidMount = (
+    editor: Monaco.editor.IStandaloneDiffEditor,
+    monaco: typeof Monaco
+  ) => {
+    const element = editor.getDomNode()
+    const model = editor.getModel()
+    if (!model || !modifiedCode) return
+    editor.onDidUpdateDiff(() => {
+      const lineChanges = editor.getLineChanges()
+      const originalLineHeight = editor
+        .getOriginalEditor()
+        .getOption(Monaco.editor.EditorOption.lineHeight)
+      const modifiedLineHeight = editor
+        .getModifiedEditor()
+        .getOption(Monaco.editor.EditorOption.lineHeight)
+      const originalLineCount = model.original.getLineCount() || 1
+      const modifiedLineCount = lineChanges ? lineChanges.length : 0
+      const originalHeight =
+        editor.getOriginalEditor().getTopForLineNumber(originalLineCount + 1) +
+        originalLineHeight
+      const modifiedHeight =
+        editor.getModifiedEditor().getTopForLineNumber(modifiedLineCount) +
+        modifiedLineHeight
+      const height = originalHeight + modifiedHeight
+      element.style.height = `${height}px`
+      element.style.maxHeight = `${height}px`
+      editor.layout()
+    })
   }
   return (
-    <div style={{ fontSize: 14, textAlign: 'left', position: 'relative' }}>
+    <div className="code-preview__container">
+      <CopyToClipboard
+        text={modifiedCode || originalCode}
+        onCopy={() => {
+          logEvent('코드_복사')
+          toastSuccess('코드가 복사되었습니다.')
+        }}
+      >
+        <Icon name="copy" className="button copy" />
+      </CopyToClipboard>
+      <Icon name="at" className="button mention" onClick={onCodeLabelClick} />
       {modifiedCode ? (
-        <DiffViewer
-          oldValue={originalCode}
-          newValue={modifiedCode}
-          splitView={false}
-          useDarkTheme
-          renderContent={renderContent}
+        <MonacoDiffEditor
+          original={originalCode}
+          defaultValue={modifiedCode}
+          theme="vs-dark"
+          options={{
+            readOnly: true,
+            scrollbar: { vertical: 'hidden' },
+            scrollBeyondLastLine: false,
+            minimap: { enabled: false },
+            renderSideBySide: false
+          }}
+          editorDidMount={diffEditorDidMount}
         />
       ) : (
-        <>
-          <button
-            style={{
-              position: 'absolute',
-              opacity: 0.5,
-              top: '0.5em',
-              right: '0.75em'
-            }}
-          >
-            a
-            <Icon name="at" />
-          </button>
-          <CopyBlock
-            text={originalCode}
-            language={language}
-            showLineNumbers
-            theme={tomorrowNight}
-            wrapLines
-            codeBlock
-          />
-        </>
+        <MonacoEditor
+          theme="vs-dark"
+          editorDidMount={editorDidMount}
+          options={{
+            readOnly: true,
+            scrollbar: { vertical: 'hidden' },
+            scrollBeyondLastLine: false,
+            minimap: { enabled: false }
+          }}
+          defaultValue={originalCode}
+          {...props}
+        />
       )}
     </div>
   )
 }
 
-export default ReCodeBlocks
+export default ReCodePreview

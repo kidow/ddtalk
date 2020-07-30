@@ -1,0 +1,31 @@
+.code-preview__container {
+  text-align: left;
+  position: relative;
+  &:hover {
+    .button {
+      opacity: 1;
+    }
+  }
+  .button {
+    position: absolute;
+    top: 0.75em;
+    opacity: 0;
+    z-index: 1000;
+    transition-delay: 0.1s;
+    color: #fff;
+    font-size: 1rem;
+    cursor: pointer;
+    &:hover {
+      opacity: 0.7;
+    }
+    &:active {
+      opacity: 0.5;
+    }
+  }
+  .mention {
+    right: 0.75em;
+  }
+  .copy {
+    right: 2.75em;
+  }
+}

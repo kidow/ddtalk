@@ -1,9 +1,7 @@
 import React from 'react'
-import { Modal, ModalProps, Popup, Icon, Button } from 'semantic-ui-react'
-import CopyToClipboard from 'react-copy-to-clipboard'
+import { Modal, ModalProps, Button } from 'semantic-ui-react'
 import {
   logEvent,
-  toastSuccess,
   useStore,
   useObject,
   createDoc,
@@ -101,30 +99,7 @@ const ReModalCode: React.FunctionComponent<Props> = ({ open, onClose }) => {
   }
   return (
     <Modal size="large" className="code__modal" open={open} onClose={onClose}>
-      <Modal.Header>
-        <>{language}</>
-        <div>
-          <Popup
-            content="코드 복사"
-            position="top center"
-            trigger={
-              <CopyToClipboard
-                text={modifiedCode || originalCode}
-                onCopy={() => {
-                  logEvent('코드_복사')
-                  toastSuccess('코드가 복사되었습니다.')
-                }}
-              >
-                <Icon
-                  name="copy outline"
-                  size="large"
-                  style={{ cursor: 'pointer' }}
-                />
-              </CopyToClipboard>
-            }
-          />
-        </div>
-      </Modal.Header>
+      <Modal.Header>{language}</Modal.Header>
       {modifiedCode ? <ReDiffEditor /> : <ReEditor />}
       <div style={{ position: 'relative' }}>
         <TextAreaAutoSize

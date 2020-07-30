@@ -260,16 +260,6 @@ const ReChat: React.FunctionComponent<Props> = ({ room, onCodeClick }) => {
                           </Label>
                         </Comment.Action>
                       ))}
-                      {/* {!!chat.originalCode && (
-                        <Comment.Action>
-                          <Label
-                            onClick={() => onCodeLabelClick(chat)}
-                            size="mini"
-                          >
-                            {chat.language}
-                          </Label>
-                        </Comment.Action>
-                      )} */}
                       <Image.Group size="small">
                         {chat.images.map((image: any, i: number) => (
                           <Image
@@ -286,23 +276,8 @@ const ReChat: React.FunctionComponent<Props> = ({ room, onCodeClick }) => {
                           originalCode={chat.originalCode}
                           language={chat.language}
                           modifiedCode={chat.modifiedCode}
+                          onCodeLabelClick={() => onCodeLabelClick(chat)}
                         />
-                        {/* {chat.modifiedCode ? (
-                            <ReDiffEditor
-                              height="400"
-                              readOnly
-                              original={chat.originalCode}
-                              value={chat.modifiedCode}
-                              language={chat.language}
-                            />
-                          ) : (
-                            <ReEditor
-                              language={chat.language}
-                              readOnly
-                              height="400"
-                              value={chat.originalCode}
-                            />
-                          )} */}
                       </Comment.Actions>
                     )}
                   </Comment.Content>
