@@ -5,13 +5,14 @@ import MonacoEditor, {
   MonacoDiffEditor
 } from 'react-monaco-editor'
 import './index.scss'
-import { Icon } from 'semantic-ui-react'
+import { Icon, Popup } from 'semantic-ui-react'
 import CopyToClipboard from 'react-copy-to-clipboard'
 import { logEvent, toastSuccess } from 'services'
 
 interface Props extends MonacoEditorProps {
   originalCode: string
   modifiedCode?: string
+  language: string
   onCodeLabelClick: () => void
 }
 interface State {}
@@ -20,6 +21,7 @@ const ReCodePreview: FunctionComponent<Props> = ({
   originalCode,
   modifiedCode,
   onCodeLabelClick,
+  language,
   ...props
 }) => {
   const editorDidMount = (
@@ -68,6 +70,12 @@ const ReCodePreview: FunctionComponent<Props> = ({
   }
   return (
     <div className="code-preview__container">
+      <Popup
+        content={language}
+        trigger={<Icon name="language" className="button language" />}
+        basic
+        inverted
+      />
       <CopyToClipboard
         text={modifiedCode || originalCode}
         onCopy={() => {
