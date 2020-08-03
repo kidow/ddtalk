@@ -32,13 +32,18 @@ import { isBrowser } from 'react-device-detect'
 
 export interface Props extends ModalProps {
   onClose: () => void
+  onScrollTop: () => void
 }
 interface State {
   loading: boolean
   message: string
 }
 
-const ReModalEditor: React.FunctionComponent<Props> = ({ open, onClose }) => {
+const ReModalEditor: React.FunctionComponent<Props> = ({
+  open,
+  onClose,
+  onScrollTop
+}) => {
   if (!open) return null
   const [{ loading, message }, setState, onChange] = useObject<State>({
     loading: false,
@@ -92,6 +97,7 @@ const ReModalEditor: React.FunctionComponent<Props> = ({ open, onClose }) => {
             )
         })
       }
+      onScrollTop()
       logEvent('코드_삽입', {
         language,
         room_id: id

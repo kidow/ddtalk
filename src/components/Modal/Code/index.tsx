@@ -19,13 +19,18 @@ import { useParams } from 'react-router-dom'
 
 interface Props extends ModalProps {
   onClose: () => void
+  onScrollTop: () => void
 }
 interface State {
   message: string
   loading: boolean
 }
 
-const ReModalCode: React.FunctionComponent<Props> = ({ open, onClose }) => {
+const ReModalCode: React.FunctionComponent<Props> = ({
+  open,
+  onClose,
+  onScrollTop
+}) => {
   if (!open) return null
   const [{ message, loading }, setState, onChange] = useObject<State>({
     message: '',
@@ -89,6 +94,7 @@ const ReModalCode: React.FunctionComponent<Props> = ({ open, onClose }) => {
             )
         })
       }
+      onScrollTop()
     } catch (err) {
       console.log(err)
       setState({ loading: false })

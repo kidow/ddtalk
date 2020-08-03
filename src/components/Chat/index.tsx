@@ -31,13 +31,18 @@ import { ReEditor, ReDiffEditor, ReCodePreview } from 'components'
 interface Props {
   room?: IRoom
   onCodeClick: (chat: IChat) => void
+  onScrollTop: () => void
 }
 interface State {
   imageOpen: boolean
   previewImage: string
 }
 
-const ReChat: React.FunctionComponent<Props> = ({ room, onCodeClick }) => {
+const ReChat: React.FunctionComponent<Props> = ({
+  room,
+  onCodeClick,
+  onScrollTop
+}) => {
   const [{ imageOpen, previewImage }, setState] = useObject<State>({
     imageOpen: false,
     previewImage: ''
@@ -137,6 +142,7 @@ const ReChat: React.FunctionComponent<Props> = ({ room, onCodeClick }) => {
         mentions: [],
         fcm_token: fcm_token || ''
       })
+      onScrollTop()
     }
   }
 

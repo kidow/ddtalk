@@ -14,12 +14,17 @@ const gf = new GiphyFetch(process.env.REACT_APP_GIPHY_KEY)
 interface Props {
   open: boolean
   onClose: () => void
+  onScrollTop: () => void
 }
 interface State {
   term: string
 }
 
-const ReGiphy: React.FunctionComponent<Props> = ({ open, onClose }) => {
+const ReGiphy: React.FunctionComponent<Props> = ({
+  open,
+  onClose,
+  onScrollTop
+}) => {
   const dispatch = useDispatch()
   const { id } = useParams()
   const { uid, nickname, photoURL } = useStore<IAuthState>('auth')
@@ -44,6 +49,7 @@ const ReGiphy: React.FunctionComponent<Props> = ({ open, onClose }) => {
       fcm_token: fcm_token || ''
     })
     onClose()
+    onScrollTop()
   }
   const fetchGifs = (offset: number) => gf.trending({ offset })
   return (

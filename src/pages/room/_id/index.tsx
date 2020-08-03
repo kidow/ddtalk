@@ -103,7 +103,7 @@ const Room: FunctionComponent<Props> = () => {
     }
 
     dispatch(ChatActions.SET_MESSAGE(''))
-    if (ref.current) ref.current.scrollTop = ref.current.scrollHeight
+
     await createDoc('chat', {
       message: message.trim(),
       roomId: id,
@@ -132,6 +132,11 @@ const Room: FunctionComponent<Props> = () => {
         mentions: [],
         fcm_token: fcm_token || ''
       })
+    onScrollTop()
+  }
+
+  const onScrollTop = () => {
+    if (ref.current) ref.current.scrollTop = ref.current.scrollHeight
   }
 
   const imageUpload = () => {
@@ -218,6 +223,7 @@ const Room: FunctionComponent<Props> = () => {
       fcm_token: fcm_token || ''
     })
     await callBot(id)
+    onScrollTop()
   }
 
   const room = rooms.find((room) => room.id === id)
@@ -283,6 +289,7 @@ const Room: FunctionComponent<Props> = () => {
       <div className="chat__container" ref={ref}>
         <ReChat
           room={room}
+          onScrollTop={onScrollTop}
           onCodeClick={() => setState({ codePreviewOpen: true })}
         />
       </div>
@@ -315,6 +322,7 @@ const Room: FunctionComponent<Props> = () => {
       </div>
       {codePreviewOpen && (
         <ReModalCode
+          onScrollTop={onScrollTop}
           language={language}
           open={codePreviewOpen}
           onClose={() => {
@@ -332,6 +340,7 @@ const Room: FunctionComponent<Props> = () => {
       {codeOpen && (
         <ReModalEditor
           open={codeOpen}
+          onScrollTop={onScrollTop}
           onClose={() => {
             dispatch(
               ChatActions.SET_CHAT({
@@ -354,6 +363,7 @@ const Room: FunctionComponent<Props> = () => {
         <ReGiphy
           open={giphyOpen}
           onClose={() => setState({ giphyOpen: false })}
+          onScrollTop={onScrollTop}
         />
       )}
       <Dimmer active={uploading}>

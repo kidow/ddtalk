@@ -50,6 +50,7 @@ const ReModalImprove: React.FunctionComponent<Props> = ({ open, onClose }) => {
           loading={loading}
           positive
           content="보내기"
+          disabled={!content}
           onClick={onSubmit}
         />
       </Modal.Actions>
