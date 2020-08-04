@@ -73,6 +73,7 @@ const ReCodePreview: FunctionComponent<Props> = ({
       <Popup
         content={language}
         trigger={<Icon name="language" className="button language" />}
+        style={{ padding: '4px 8px' }}
         basic
         inverted
       />
