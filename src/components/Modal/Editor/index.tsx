@@ -14,7 +14,8 @@ import {
   logEvent,
   placeholder,
   isAuthRequired,
-  sendMessage
+  sendMessage,
+  toastInfo
 } from 'services'
 import { ReEditor, ReMentions } from 'components'
 import {
@@ -57,8 +58,8 @@ const ReModalEditor: React.FunctionComponent<Props> = ({
   const { fcm_token } = useStore<ISettingState>('setting')
   const dispatch = useDispatch()
   const onCodeEmbed = async () => {
-    if (!isLoggedIn || !uid) return
-    if (!code) return
+    if (!isLoggedIn || !uid || !code) return
+    if (!language) return toastInfo('언어를 선택해 주세요.')
     setState({ loading: true })
     try {
       await createDoc('chat', {

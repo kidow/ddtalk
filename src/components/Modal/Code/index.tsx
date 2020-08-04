@@ -7,7 +7,8 @@ import {
   createDoc,
   placeholder,
   isAuthRequired,
-  sendMessage
+  sendMessage,
+  toastInfo
 } from 'services'
 import { ReEditor, ReDiffEditor } from 'components'
 import './index.scss'
@@ -48,6 +49,7 @@ const ReModalCode: React.FunctionComponent<Props> = ({
   const dispatch = useDispatch()
   const onModifiedCodeEmbed = async () => {
     if (!isLoggedIn || !uid) return
+    if (!language) return toastInfo('언어를 선택해 주세요.')
     try {
       let data: any = {
         roomId: id,
