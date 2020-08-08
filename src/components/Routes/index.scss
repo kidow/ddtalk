@@ -1,10 +1,13 @@
 .main__container {
-  flex: 1;
-  background: #fff;
+  max-width: 968px;
+  display: grid;
+  background-color: #fff;
+  grid-template-rows: 1fr;
   border-left: 1px solid rgb(235, 236, 237);
   border-right: 1px solid rgb(235, 236, 237);
-  height: 100vh;
-  overflow: auto;
+  border-bottom: 1px solid rgb(235, 236, 237);
+  height: 100%;
+  grid-area: primary / primary / primary / primary;
   &::-webkit-scrollbar {
     display: none;
   }

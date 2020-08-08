@@ -11,14 +11,14 @@ import {
   Image,
   Dropdown,
   DropdownItemProps,
-  Dimmer,
-  Loader
+  Loader,
+  Placeholder
 } from 'semantic-ui-react'
 import { useHistory, useLocation, Link } from 'react-router-dom'
 import './index.scss'
 import { useDispatch } from 'react-redux'
 import { AuthActions } from 'store'
-import { IAuthState, IRoomState, IRoom } from 'types'
+import { IAuthState, IRoomState } from 'types'
 import { useObject, signOut, useStore, logEvent } from 'services'
 import moment from 'moment'
 import { isBrowser } from 'react-device-detect'
@@ -101,15 +101,15 @@ const ReRooms: React.FunctionComponent<Props> = () => {
     })
   return (
     <>
-      <div
+      <section
         className="rooms__container"
         style={{ display: pathname !== '/' && !isBrowser ? 'none' : 'block' }}
       >
-        <h1 className="rooms__logo">
+        <div className="rooms__logo">
           <ReLogo />
           <Dropdown
             icon={null}
-            direction={isBrowser ? 'right' : 'left'}
+            direction="left"
             options={photoURL ? options : undefined}
             onOpen={() => logEvent('프로필_클릭')}
             trigger={
@@ -128,18 +128,20 @@ const ReRooms: React.FunctionComponent<Props> = () => {
               )
             }
           />
-        </h1>
+        </div>
+
         {loading ? (
-          <div
-            style={{
-              marginTop: 60,
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              height: 'calc(100vh - 60px)'
-            }}
-          >
-            <Loader active={loading} inline />
+          <div>
+            {Array.from({ length: 10 }).map((_, i) => (
+              <div key={i} style={{ padding: 16 }}>
+                <Placeholder fluid>
+                  <Placeholder.Header image>
+                    <Placeholder.Line />
+                    <Placeholder.Line />
+                  </Placeholder.Header>
+                </Placeholder>
+              </div>
+            ))}
           </div>
         ) : (
           <List divided verticalAlign="middle">
@@ -185,7 +187,7 @@ const ReRooms: React.FunctionComponent<Props> = () => {
             })}
           </List>
         )}
-      </div>
+      </section>
       <ReModalAdmin
         open={adminOpen}
         onClose={() => setState({ adminOpen: false })}

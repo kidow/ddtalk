@@ -5,7 +5,8 @@ import {
   Route,
   Switch,
   RouteProps,
-  RouteComponentProps
+  RouteComponentProps,
+  useLocation
 } from 'react-router-dom'
 import { ReNotFound } from 'components'
 import './index.scss'
@@ -14,6 +15,7 @@ import { IChat, IBotState, IChangelogState } from 'types'
 import { useDispatch } from 'react-redux'
 import { RoomActions, ChangelogsActions, BotActions, CodeActions } from 'store'
 import { logEvent, getChangelogs, getBot, useStore, getCodes } from 'services'
+import { isMobile } from 'react-device-detect'
 
 export interface Props {}
 
@@ -29,6 +31,7 @@ const ReRoutes: React.FunctionComponent<Props> = () => {
     />
   )
   const dispatch = useDispatch()
+  const { pathname } = useLocation()
   const { menus } = useStore<IBotState>('bot')
   const { changelogs } = useStore<IChangelogState>('changelog')
   const setRooms = () => {
@@ -77,23 +80,36 @@ const ReRoutes: React.FunctionComponent<Props> = () => {
   }
   const getLogs = async () => {
     if (changelogs.length) return
-    const data = await getChangelogs()
-    dispatch(ChangelogsActions.SET_CHANGELOGS(data))
+    try {
+      const data = await getChangelogs()
+      dispatch(ChangelogsActions.SET_CHANGELOGS(data))
+    } catch (err) {
+      console.log(err)
+    }
   }
   const getBotMenus = async () => {
     if (menus.length) return
-    const data = await getBot('메뉴추천')
-    dispatch(BotActions.SET_MENUS(data))
+    try {
+      const data = await getBot('메뉴추천')
+      dispatch(BotActions.SET_MENUS(data))
+    } catch (err) {
+      console.log(err)
+    }
   }
   const getSampleCodes = async () => {
-    const data = await getCodes()
-    dispatch(CodeActions.SET_CODES(data))
+    try {
+      const data = await getCodes()
+      dispatch(CodeActions.SET_CODES(data))
+    } catch (err) {
+      console.log(err)
+    }
   }
   useEffect(() => {
     get()
   }, [])
+  if (pathname === '/' && isMobile) return null
   return (
-    <div className="main__container">
+    <section className="main__container">
       <Switch>
         {routes.map(({ path, component }, i) => (
           <Routes
@@ -106,7 +122,7 @@ const ReRoutes: React.FunctionComponent<Props> = () => {
         ))}
         <Routes component={ReNotFound} />
       </Switch>
-    </div>
+    </section>
   )
 }
 

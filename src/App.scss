@@ -1,0 +1,20 @@
+.container {
+  width: 1392px;
+  max-width: 100%;
+  margin: 0 auto;
+  .grid__container {
+    display: grid;
+    justify-self: center;
+    grid-template-columns: minmax(320px, 400px) minmax(600px, 968px);
+    grid-template-rows: 100%;
+    grid-template-areas: 'secondary primary';
+    max-width: 1392px;
+    gap: 24px;
+    margin: 0 24px;
+    @media screen and (max-width: 500px) {
+      display: block;
+      margin: 0;
+      height: 100vh;
+    }
+  }
+}

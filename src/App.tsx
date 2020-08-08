@@ -7,6 +7,7 @@ import * as Sentry from '@sentry/browser'
 import { BrowserOptions } from '@sentry/browser'
 import { captureException } from 'services'
 import TagManager from 'react-gtm-module'
+import './App.scss'
 
 let options: BrowserOptions = {
   dsn: process.env.REACT_APP_SENTRY_DSN,
@@ -65,16 +66,13 @@ class App extends PureComponent<Props, State> {
 
   render() {
     return (
-      <div
-        className="container"
-        style={{ width: 1127, maxWidth: '100%', margin: '0 auto' }}
-      >
-        <div style={{ display: 'flex' }}>
+      <main className="container">
+        <div className="grid__container">
           <ReRooms />
           <ReRoutes />
-          <SemanticToastContainer />
         </div>
-      </div>
+        <SemanticToastContainer />
+      </main>
     )
   }
 }

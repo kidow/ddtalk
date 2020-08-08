@@ -275,47 +275,51 @@ const Room: FunctionComponent<Props> = () => {
   return (
     <>
       <ReSEO title={title} image={image} />
-      <h1 className="chat__title">
-        {!isBrowser && (
-          <div
-            style={{ marginRight: 4, cursor: 'pointer' }}
-            onClick={() => push('/')}
-          >
-            <Icon name="arrow left" />
+      <div className="chat-container">
+        <div className="chat-title__container">
+          <div className="chat-title-bar">
+            {!isBrowser && (
+              <div
+                style={{ marginRight: 4, cursor: 'pointer' }}
+                onClick={() => push('/')}
+              >
+                <Icon name="arrow left" />
+              </div>
+            )}
+            <h1>{room ? room.name : ''}</h1>
           </div>
-        )}
-        <div>{room ? room.name : ''}</div>
-      </h1>
-      <div className="chat__container" ref={ref}>
-        <ReChat
-          room={room}
-          onScrollTop={onScrollTop}
-          onCodeClick={() => setState({ codePreviewOpen: true })}
-        />
-      </div>
-      <div className="chat__input__wrapper">
-        <div className="chat__input__container">
-          <div className="chat__input">
-            <Dropdown
-              icon={null}
-              trigger={<Icon className="addon" name="add" size="large" />}
-              direction="right"
-              options={options}
-            />
-            <div className="form__container">
-              <ReTextarea
-                value={message}
-                onChange={(e) =>
-                  dispatch(ChatActions.SET_MESSAGE(e.target.value))
-                }
-                onEnter={onSubmit}
+        </div>
+        <div className="chat-message__container" ref={ref}>
+          <ReChat
+            room={room}
+            onScrollTop={onScrollTop}
+            onCodeClick={() => setState({ codePreviewOpen: true })}
+          />
+        </div>
+        <div className="chat__input__wrapper">
+          <div className="chat__input__container">
+            <div className="chat__input">
+              <Dropdown
+                icon={null}
+                trigger={<Icon className="addon" name="add" size="large" />}
+                direction="right"
+                options={options}
               />
-              <Button
-                onClick={onSubmit}
-                circular
-                icon="send"
-                className="send"
-              />
+              <div className="form__container">
+                <ReTextarea
+                  value={message}
+                  onChange={(e) =>
+                    dispatch(ChatActions.SET_MESSAGE(e.target.value))
+                  }
+                  onEnter={onSubmit}
+                />
+                <Button
+                  onClick={onSubmit}
+                  circular
+                  icon="send"
+                  className="send"
+                />
+              </div>
             </div>
           </div>
         </div>
