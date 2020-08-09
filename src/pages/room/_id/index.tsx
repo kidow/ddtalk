@@ -136,7 +136,7 @@ const Room: FunctionComponent<Props> = () => {
   }
 
   const onScrollTop = () => {
-    if (ref.current) ref.current.scrollTop = ref.current.scrollHeight
+    if (ref.current) window.scrollTo(0, ref.current.scrollHeight)
   }
 
   const imageUpload = () => {
