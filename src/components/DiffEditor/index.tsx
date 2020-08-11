@@ -32,6 +32,7 @@ const ReDiffEditor: React.FunctionComponent<Props> = (props) => {
     else if (props.language === 'visual basic') setModelLanguage('vb')
     else if (props.language === 'c#') setModelLanguage('csharp')
     else if (props.language === 'c++') setModelLanguage('cpp')
+    else if (props.language === 'flutter') setModelLanguage('dart')
   }
   return (
     <MonacoDiffEditor

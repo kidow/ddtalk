@@ -40,6 +40,7 @@ const ReEditor: React.FunctionComponent<Props> = ({ readOnly, ...props }) => {
     else if (language === 'visual basic') setModelLanguage('vb')
     else if (language === 'c#') setModelLanguage('csharp')
     else if (language === 'c++') setModelLanguage('cpp')
+    else if (language === 'flutter') setModelLanguage('dart')
   }
   useEffect(() => {
     const models = Monaco.editor.getModels()
@@ -50,6 +51,7 @@ const ReEditor: React.FunctionComponent<Props> = ({ readOnly, ...props }) => {
     else if (language === 'visual basic') setModelLanguage('vb')
     else if (language === 'c#') setModelLanguage('csharp')
     else if (language === 'c++') setModelLanguage('cpp')
+    else if (language === 'flutter') setModelLanguage('dart')
   }, [language])
   return (
     <MonacoEditor
