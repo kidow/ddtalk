@@ -4,7 +4,7 @@
 
 ![intro-code](https://user-images.githubusercontent.com/39021158/87674051-6de33600-c7b0-11ea-8622-34a1410560d8.gif)
 
-Link : https://ddtalk.tk
+Link : https://ddtalk.kr
 
 [Blog](https://kidow.kr/post/%F0%9F%92%AC-%EA%B0%9C%EB%B0%9C%EC%9E%90-%EC%B1%84%ED%8C%85%EB%B0%A9%EC%9D%84-%EB%A7%8C%EB%93%A4%EC%96%B4-%EB%B4%A4%EC%8A%B5%EB%8B%88%EB%8B%A4-pgY7tBlPnl85jPb1Wp3Y)
 [Velog](https://velog.io/@kidow/%EA%B0%9C%EB%B0%9C%EC%9E%90-%EC%B1%84%ED%8C%85%EB%B0%A9%EC%9D%84-%EB%A7%8C%EB%93%A4%EC%96%B4-%EB%B4%A4%EC%8A%B5%EB%8B%88%EB%8B%A4)

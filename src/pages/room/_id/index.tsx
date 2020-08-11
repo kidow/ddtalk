@@ -189,17 +189,7 @@ const Room: FunctionComponent<Props> = () => {
       }
     }
   }
-  useEffect(() => {
-    const timer = setInterval(() => {
-      if (count) setState({ count: 0 })
-    }, 5000)
-    return () => clearInterval(timer)
-  }, [count])
-  useEffect(() => {
-    if (!isLoggedIn) document.removeEventListener('keydown', onRegisterShortcut)
-    else document.addEventListener('keydown', onRegisterShortcut)
-    return () => document.removeEventListener('keydown', onRegisterShortcut)
-  }, [isLoggedIn])
+
   const onCodeClick = () => {
     logEvent('코드_삽입_클릭')
     isLoggedIn ? setState({ codeOpen: true }) : toastInfo(isAuthRequired)
@@ -268,10 +258,24 @@ const Room: FunctionComponent<Props> = () => {
     }
   ]
   useEffect(() => {
+    const timer = setInterval(() => {
+      if (count) setState({ count: 0 })
+    }, 5000)
+    return () => clearInterval(timer)
+  }, [count])
+  useEffect(() => {
+    if (!isLoggedIn) document.removeEventListener('keydown', onRegisterShortcut)
+    else document.addEventListener('keydown', onRegisterShortcut)
+    return () => document.removeEventListener('keydown', onRegisterShortcut)
+  }, [isLoggedIn])
+  useEffect(() => {
     if (room && languages.indexOf(room.name.toLowerCase()) !== -1) {
       dispatch(ChatActions.SET_CHAT({ language: room.name.toLowerCase() }))
     }
   }, [room, id])
+  useEffect(() => {
+    onScrollTop()
+  }, [id])
   return (
     <>
       <ReSEO title={title} image={image} />

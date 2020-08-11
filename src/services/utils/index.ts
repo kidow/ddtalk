@@ -24,7 +24,7 @@ export const dataURLtoFile = (dataurl: string) => {
 export const cookieSet = (name: string, value: string | object) =>
   jsCookie.set(name, value, {
     expires: 365,
-    domain: process.env.NODE_ENV === 'production' ? '.ddtalk.tk' : 'localhost'
+    domain: process.env.NODE_ENV === 'production' ? '.ddtalk.kr' : 'localhost'
   })
 
 export const callBot = (id: string) =>
