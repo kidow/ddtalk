@@ -8,6 +8,7 @@ import { useParams } from 'react-router-dom'
 import { IAuthState, IChatState, ISettingState } from 'types'
 import { useDispatch } from 'react-redux'
 import { ChatActions } from 'store'
+import ClickAwayListener from 'react-click-away-listener'
 
 const gf = new GiphyFetch(process.env.REACT_APP_GIPHY_KEY)
 
@@ -25,6 +26,7 @@ const ReGiphy: React.FunctionComponent<Props> = ({
   onClose,
   onScrollTop
 }) => {
+  if (!open) return null
   const dispatch = useDispatch()
   const { id } = useParams()
   const { uid, nickname, photoURL } = useStore<IAuthState>('auth')
@@ -53,17 +55,22 @@ const ReGiphy: React.FunctionComponent<Props> = ({
   }
   const fetchGifs = (offset: number) => gf.trending({ offset })
   return (
-    <Portal
-      closeOnTriggerClick
-      openOnTriggerClick
-      open={open}
-      onClose={onClose}
+    <ClickAwayListener
+      style={{
+        position: 'absolute',
+        zIndex: 1000,
+        bottom: '75%',
+        boxShadow: '0 1px 2px 0 rgba(34,36,38,.15)',
+        border: '1px solid rgba(34,36,38,.15)',
+        borderRadius: 4
+      }}
+      onClickAway={onClose}
     >
       <Segment
         style={{
-          left: isMobile ? '0%' : '38%',
+          left: '0%',
           position: 'absolute',
-          bottom: '5%',
+          bottom: '100%',
           zIndex: 1000,
           overflow: 'auto',
           height: 300
@@ -83,7 +90,7 @@ const ReGiphy: React.FunctionComponent<Props> = ({
           onGifClick={onGifClick}
         />
       </Segment>
-    </Portal>
+    </ClickAwayListener>
   )
 }
 

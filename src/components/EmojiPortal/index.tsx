@@ -1,12 +1,11 @@
 import React from 'react'
-import { Portal } from 'semantic-ui-react'
 import 'emoji-mart/css/emoji-mart.css'
 import { Picker, BaseEmoji } from 'emoji-mart'
 import { logEvent, useStore } from 'services'
 import { useDispatch } from 'react-redux'
 import { IChatState } from 'types'
 import { ChatActions } from 'store'
-import { isMobile } from 'react-device-detect'
+import ClickAwayListener from 'react-click-away-listener'
 
 interface Props {
   open: boolean
@@ -15,29 +14,29 @@ interface Props {
 interface State {}
 
 const ReEmojiPortal: React.FunctionComponent<Props> = ({ open, onClose }) => {
+  if (!open) return null
   const dispatch = useDispatch()
   const { message } = useStore<IChatState>('chat')
   return (
-    <Portal
-      closeOnTriggerClick
-      openOnTriggerClick
-      open={open}
-      onClose={onClose}
+    <ClickAwayListener
+      style={{
+        position: 'absolute',
+        zIndex: 1000,
+        bottom: '75%',
+        boxShadow: '0 1px 2px 0 rgba(34,36,38,.15)',
+        border: '1px solid rgba(34,36,38,.15)',
+        borderRadius: 4
+      }}
+      onClickAway={onClose}
     >
       <Picker
-        style={{
-          left: isMobile ? '0%' : '38%',
-          position: 'absolute',
-          bottom: '5%',
-          zIndex: 1000
-        }}
         i18n={{ search: '검색' }}
         onSelect={(value: BaseEmoji) => {
           dispatch(ChatActions.SET_MESSAGE(message + value.native))
           logEvent('이모지_삽입', { emoji_id: value.id })
         }}
       />
-    </Portal>
+    </ClickAwayListener>
   )
 }
 

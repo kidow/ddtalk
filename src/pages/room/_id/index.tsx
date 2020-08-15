@@ -14,7 +14,8 @@ import {
   Dimmer,
   Loader,
   Dropdown,
-  DropdownItemProps
+  DropdownItemProps,
+  Segment
 } from 'semantic-ui-react'
 import { ChatActions, MentionActions } from 'store'
 import {
@@ -43,6 +44,7 @@ import { useParams, useHistory } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import moment from 'moment'
 import { isMacOs, isBrowser } from 'react-device-detect'
+import ClickAwayListener from 'react-click-away-listener'
 
 export interface Props {}
 interface State {
@@ -309,6 +311,15 @@ const Room: FunctionComponent<Props> = () => {
                 direction="right"
                 options={options}
               />
+              <ReEmojiPortal
+                open={emojiOpen}
+                onClose={() => setState({ emojiOpen: false })}
+              />
+              <ReGiphy
+                open={giphyOpen}
+                onClose={() => setState({ giphyOpen: false })}
+                onScrollTop={onScrollTop}
+              />
               <div className="form__container">
                 <ReTextarea
                   value={message}
@@ -328,52 +339,36 @@ const Room: FunctionComponent<Props> = () => {
           </div>
         </div>
       </div>
-      {codePreviewOpen && (
-        <ReModalCode
-          onScrollTop={onScrollTop}
-          language={language}
-          open={codePreviewOpen}
-          onClose={() => {
-            dispatch(
-              ChatActions.SET_CHAT({
-                language: room ? room.name.toLowerCase() : 'javascript'
-              })
-            )
-            dispatch(ChatActions.INITIALIZE_CODE())
-            setState({ codePreviewOpen: false })
-            dispatch(MentionActions.INITIALIZE())
-          }}
-        />
-      )}
-      {codeOpen && (
-        <ReModalEditor
-          open={codeOpen}
-          onScrollTop={onScrollTop}
-          onClose={() => {
-            dispatch(
-              ChatActions.SET_CHAT({
-                language: room ? room.name.toLowerCase() : 'javascript'
-              })
-            )
-            dispatch(ChatActions.SET_CODE(''))
-            setState({ codeOpen: false })
-            dispatch(MentionActions.INITIALIZE())
-          }}
-        />
-      )}
-      {emojiOpen && (
-        <ReEmojiPortal
-          open={emojiOpen}
-          onClose={() => setState({ emojiOpen: false })}
-        />
-      )}
-      {giphyOpen && (
-        <ReGiphy
-          open={giphyOpen}
-          onClose={() => setState({ giphyOpen: false })}
-          onScrollTop={onScrollTop}
-        />
-      )}
+      <ReModalCode
+        onScrollTop={onScrollTop}
+        language={language}
+        open={codePreviewOpen}
+        onClose={() => {
+          dispatch(
+            ChatActions.SET_CHAT({
+              language: room ? room.name.toLowerCase() : 'javascript'
+            })
+          )
+          dispatch(ChatActions.INITIALIZE_CODE())
+          setState({ codePreviewOpen: false })
+          dispatch(MentionActions.INITIALIZE())
+        }}
+      />
+      <ReModalEditor
+        open={codeOpen}
+        onScrollTop={onScrollTop}
+        onClose={() => {
+          dispatch(
+            ChatActions.SET_CHAT({
+              language: room ? room.name.toLowerCase() : 'javascript'
+            })
+          )
+          dispatch(ChatActions.SET_CODE(''))
+          setState({ codeOpen: false })
+          dispatch(MentionActions.INITIALIZE())
+        }}
+      />
+
       <Dimmer active={uploading}>
         <Loader>이미지 업로드 중입니다...</Loader>
       </Dimmer>

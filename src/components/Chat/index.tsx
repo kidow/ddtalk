@@ -26,7 +26,7 @@ import { ChatActions, MentionActions } from 'store'
 import Linkify from 'react-linkify'
 import './index.scss'
 import { useParams } from 'react-router-dom'
-import { ReEditor, ReDiffEditor, ReCodePreview } from 'components'
+import { ReCodePreview } from 'components'
 
 interface Props {
   room?: IRoom
@@ -224,7 +224,12 @@ const ReChat: React.FunctionComponent<Props> = ({
                           decoratedText,
                           key
                         ) => (
-                          <a target="blank" href={decoratedHref} key={key}>
+                          <a
+                            target="blank"
+                            style={{ color: '#4183c4' }}
+                            href={decoratedHref}
+                            key={key}
+                          >
                             {decoratedText}
                           </a>
                         )}
