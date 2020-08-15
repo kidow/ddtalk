@@ -8,7 +8,7 @@ import {
 } from 'vertical-timeline-component-react'
 import { useStore } from 'services'
 import { IChangelogState } from 'types'
-import { Divider } from 'semantic-ui-react'
+import { Divider, Header } from 'semantic-ui-react'
 
 interface Props {}
 interface State {}
@@ -18,7 +18,9 @@ const ReChangeLog: React.FunctionComponent<Props> = () => {
   if (!changelogs.length) return null
   return (
     <>
-      <Divider horizontal>변경 사항</Divider>
+      <Header as="h4" style={{ marginLeft: 30 }}>
+        변경 사항
+      </Header>
       <Timeline>
         {changelogs.map((timeline, i) => (
           <Content key={i}>
