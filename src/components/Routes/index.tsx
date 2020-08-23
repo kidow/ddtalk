@@ -62,7 +62,7 @@ const ReRoutes: React.FunctionComponent<Props> = () => {
           querySnapshot.docChanges().forEach((change) => {
             if (change.type !== 'added') return
             let data = change.doc.data() as IChat
-            data.message = data.message.replace(/\n/g, '<br />')
+            // data.message = data.message.replace(/\r?\n/g, '\n')
             dispatch(RoomActions.ADD_CHAT(data))
             logEvent('채팅_스냅샷', { room_id: data.roomId })
             resolve()

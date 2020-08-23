@@ -234,7 +234,12 @@ const ReChat: React.FunctionComponent<Props> = ({
                           </a>
                         )}
                       >
-                        {chat.message}
+                        {chat.message.split('\n').map((item, i) => (
+                          <span key={i}>
+                            {item}
+                            <br />
+                          </span>
+                        ))}
                       </Linkify>
                     </Comment.Text>
                     <Comment.Actions>
