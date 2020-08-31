@@ -1,4 +1,4 @@
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
+import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit'
 import { IAuthState } from 'types'
 import { onAuthStateChanged, setUserId, setUserProperties } from 'services'
 
@@ -25,6 +25,9 @@ export default createSlice({
       state.photoURL = ''
       state.isLoggedIn = false
       state.email = ''
+    },
+    SET_OPEN: (state, action: PayloadAction<boolean>) => {
+      state.open = action.payload
     }
   },
   extraReducers: (builder) => {

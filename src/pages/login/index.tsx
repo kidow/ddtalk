@@ -13,7 +13,8 @@ import {
 } from 'services'
 import { useDispatch } from 'react-redux'
 import { AuthActions } from 'store'
-import { ReSEO } from 'components'
+import { ReSEO, ReLogo } from 'components'
+import { isMobile } from 'react-device-detect'
 
 interface Props {}
 interface State {
@@ -54,6 +55,17 @@ const Login: React.FunctionComponent<Props> = () => {
         }}
       >
         <div>
+          {isMobile && (
+            <div
+              style={{
+                display: 'flex',
+                justifyContent: 'center',
+                marginBottom: 16
+              }}
+            >
+              <ReLogo />
+            </div>
+          )}
           <Button
             style={{ width: 165 }}
             color="google plus"

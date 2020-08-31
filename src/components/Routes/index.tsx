@@ -8,10 +8,10 @@ import {
   RouteComponentProps,
   useLocation
 } from 'react-router-dom'
-import { ReNotFound } from 'components'
+import { ReNotFound, ReModalAuth } from 'components'
 import './index.scss'
 import firebase from 'firebase/app'
-import { IChat, IBotState, IChangelogState } from 'types'
+import { IChat, IBotState, IChangelogState, IAuthState } from 'types'
 import { useDispatch } from 'react-redux'
 import { RoomActions, ChangelogsActions, BotActions, CodeActions } from 'store'
 import { logEvent, getChangelogs, getBot, useStore, getCodes } from 'services'
@@ -34,6 +34,7 @@ const ReRoutes: React.FunctionComponent<Props> = () => {
   const { pathname } = useLocation()
   const { menus } = useStore<IBotState>('bot')
   const { changelogs } = useStore<IChangelogState>('changelog')
+  const { open } = useStore<IAuthState>('auth')
   const setRooms = () => {
     return new Promise(async (resolve, reject) => {
       try {
@@ -122,6 +123,7 @@ const ReRoutes: React.FunctionComponent<Props> = () => {
         ))}
         <Routes component={ReNotFound} />
       </Switch>
+      {open && <ReModalAuth />}
     </section>
   )
 }

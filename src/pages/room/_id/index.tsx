@@ -17,7 +17,7 @@ import {
   DropdownItemProps,
   Segment
 } from 'semantic-ui-react'
-import { ChatActions, MentionActions } from 'store'
+import { ChatActions, MentionActions, AuthActions } from 'store'
 import {
   useStore,
   useObject,
@@ -143,7 +143,10 @@ const Room: FunctionComponent<Props> = () => {
 
   const imageUpload = () => {
     logEvent('이미지_업로드_클릭')
-    if (!isLoggedIn) return toastInfo(isAuthRequired)
+    if (!isLoggedIn) {
+      dispatch(AuthActions.SET_OPEN(true))
+      return
+    }
     const input = document.createElement('input')
     input.type = 'file'
     input.accept = 'image/*'
@@ -194,14 +197,21 @@ const Room: FunctionComponent<Props> = () => {
 
   const onCodeClick = () => {
     logEvent('코드_삽입_클릭')
-    isLoggedIn ? setState({ codeOpen: true }) : toastInfo(isAuthRequired)
+    isLoggedIn
+      ? setState({ codeOpen: true })
+      : dispatch(AuthActions.SET_OPEN(true))
   }
   const onEmojiClick = () => {
     logEvent('이모지_삽입_클릭')
-    isLoggedIn ? setState({ emojiOpen: true }) : toastInfo(isAuthRequired)
+    isLoggedIn
+      ? setState({ emojiOpen: true })
+      : dispatch(AuthActions.SET_OPEN(true))
   }
   const onBotClick = async () => {
-    if (!isLoggedIn) return toastInfo(isAuthRequired)
+    if (!isLoggedIn) {
+      dispatch(AuthActions.SET_OPEN(true))
+      return
+    }
     await createDoc('chat', {
       message: '#디디봇',
       roomId: id,

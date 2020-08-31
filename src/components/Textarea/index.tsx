@@ -8,7 +8,7 @@ import { Image, Icon } from 'semantic-ui-react'
 import { useStore, placeholder, isAuthRequired } from 'services'
 import { IChatState, IAuthState } from 'types'
 import { useDispatch } from 'react-redux'
-import { ChatActions } from 'store'
+import { ChatActions, AuthActions } from 'store'
 import { isBrowser } from 'react-device-detect'
 
 export interface Props extends TextareaAutosizeProps {
@@ -51,10 +51,13 @@ const ReTextArea: React.FunctionComponent<Props> = ({
                 : isAuthRequired
             }
             value={value}
-            disabled={!isLoggedIn}
+            readOnly={!isLoggedIn}
             onKeyPress={onKeyPress}
             name={name}
             style={{ border: 'none' }}
+            onClick={() => {
+              if (!isLoggedIn) dispatch(AuthActions.SET_OPEN(true))
+            }}
           />
           {!!images.length && (
             <Image.Group size="mini" style={{ fontSize: 'unset' }}>
